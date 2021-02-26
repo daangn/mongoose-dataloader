@@ -13,9 +13,10 @@
     "prettify": "prettier --write ."
   },
   "dependencies": {
+    "@types/mongoose": "~5.10.3",
     "dataloader": ">=1.4.0",
     "lodash": "^4.17.21",
-    "mongoose": "*"
+    "mongoose": "~5.10.2"
   },
   "devDependencies": {
     "@types/lodash": "^4.14.168",
