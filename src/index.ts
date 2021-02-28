@@ -6,7 +6,7 @@ import { Document, FilterQuery, Model } from 'mongoose'
 export class MongoLoader {
   private _loaderMap = new Map<string, MongoLoaderByModel<any, any>>()
 
-  mongo<D extends Document>(
+  model<D extends Document>(
     model: Model<D>
   ): {
     by: <K extends D[keyof D]>(
@@ -16,7 +16,9 @@ export class MongoLoader {
   } {
     return {
       by: (key, conditions = {}) => {
-        const cacheKey = `${model.modelName}#${key}#${JSON.stringify(conditions)}`
+        const cacheKey = `${model.modelName}#${key}#${JSON.stringify(
+          conditions
+        )}`
 
         const loader = this._loaderMap.get(cacheKey)
 
