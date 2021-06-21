@@ -18,18 +18,18 @@ $ yarn add mongoose-dataloader
 
 ## Usage
 
-### Step 1. Create `MongoLoader` per request
+### Step 1. Create `mongooseDataloader` per request
 
 ```typescript
 import { ApolloServer } from 'apollo-server'
-import { MongoLoader } from 'mongoose-dataloader'
+import { mongooseDataloader } from 'mongoose-dataloader'
 
 const apolloServer = new ApolloServer({
   // ...
   async context(/* ... */) {
     // ...
 
-    const mongo = new MongoLoader()
+    const mongo = mongooseDataloader()
 
     return {
       mongo,
@@ -64,14 +64,20 @@ const resolvers = {
     async someField(parent, args, ctx) {
       // ...
 
-      const article = await ctx.mongo.model(Article).by('_id').load(/* ... */)
+      const article = await ctx.mongo
+        .use(Article, {
+          key: '_id',
+        })
+        .load(/* ... */)
 
       // or with some additional conditions
       const article = await ctx.mongo
-        .model(Article)
-        .by('_id', {
-          user: 'SOME_USER_ID',
-          deleted: false,
+        .use(Article, {
+          key: '_id',
+          where: {
+            user: 'SOME_USER_ID',
+            deleted: false,
+          },
         })
         .load(/* ... */)
     },
