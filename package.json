@@ -1,6 +1,6 @@
 {
   "name": "mongoose-dataloader",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "repository": "https://github.com/daangn/mongoose-dataloader",
   "license": "Apache-2.0",
   "author": "Tony Won <tony@daangn.com>",
